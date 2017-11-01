@@ -1,0 +1,5 @@
+const startRobot = () => {
+  //TODO
+}
+
+startRobot();
