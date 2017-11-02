@@ -1,6 +1,6 @@
 _ = require('lodash');
 assert = require('assert');
-var {
+const {
   ASSERT_ERROR_NO_COMMAND,
   COMMANDS,
   DIRECTIONS,
@@ -14,6 +14,7 @@ var {
 } = require('../const');
 var currentCommand = {};
 
+// this method parses input and checks for validity
 exports.parseUserInput = function ({command}) {
   assert (command, ASSERT_ERROR_NO_COMMAND);
 
@@ -34,6 +35,7 @@ exports.parseUserInput = function ({command}) {
   return isValidInput ? currentCommand : null;
 };
 
+// checks if command is valid
 function checkCommand(command) {
   isValid = _.includes(COMMANDS, command);
 
@@ -44,6 +46,7 @@ function checkCommand(command) {
   return isValid;
 }
 
+// checks if its a valid place command with all required args
 function checkPlacement(dimensions) {
   if(_.isEmpty(dimensions) || dimensions.length != 3){
     console.log(ERROR_INCOMPLETE_PLACE);
@@ -62,6 +65,7 @@ function checkPlacement(dimensions) {
   return isValid;
 }
 
+// checks if dimensions are in valid range
 function checkDimension(dimension, axis) {
   isValid = dimension && _.inRange(dimension, 0 ,TABLE_UNIT);
 
@@ -72,6 +76,7 @@ function checkDimension(dimension, axis) {
   return isValid;
 }
 
+// checks if user has provided a valid direction
 function checkFacing(direction) {
   direction = _.toUpper(direction);
   isValid = direction && _.includes(DIRECTIONS, direction);
