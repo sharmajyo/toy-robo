@@ -1,15 +1,12 @@
-_ = require('lodash');
 inquirer = require('inquirer');
-var {parseUserInput} = require('./util');
+const {parseUserInput} = require('./util');
 Robot = require('./lib');
 
-var questions = [
-  {
-    type: 'input',
-    name: 'command',
-    message: 'I am waiting for your command now...'
-  }
-];
+const question = {
+  type: 'input',
+  name: 'command',
+  message: 'I am waiting for your command now...'
+};
 
 function startRobot() {
   console.log('Hi there, I am your toy robot. Please place me on the table first and start playing.');
@@ -23,8 +20,8 @@ function startRobot() {
 }
 
 function ask() {
-  inquirer.prompt(questions).then(function (answers) {
-    currentCommand = parseUserInput(answers);
+  inquirer.prompt([question]).then(function (answers) {
+    currentCommand = parseUserInput(answers.command);
 
     if(currentCommand) {
       Robot.activate(currentCommand);

@@ -1,13 +1,13 @@
 _ = require('lodash');
-assert = require('assert');
 const {
-  ASSERT_ERROR_NO_COMMAND,
+  ERROR_NO_COMMAND,
   COMMANDS,
   DIRECTIONS,
   ENUM_COMMANDS,
   ERROR_INVALID_COMMAND,
   ERROR_INCOMPLETE_PLACE,
   ERROR_INVALID_DIMENSION,
+  ERROR_INVALID_FACING,
   TABLE_UNIT,
   X_AXIS,
   Y_AXIS,
@@ -15,13 +15,15 @@ const {
 var currentCommand = {};
 
 // this method parses input and checks for validity
-exports.parseUserInput = function ({command}) {
-  assert (command, ASSERT_ERROR_NO_COMMAND);
+exports.parseUserInput = function (userInput) {
+  if(!userInput) {
+    console.log(ERROR_NO_COMMAND);
+    return;
+  }
 
   currentCommand = {};
-  args = _.words(command);
-  command = _.toUpper(args[0]);
-
+  args = _.words(_.toUpper(userInput));
+  command = args[0];
   isValidInput = checkCommand(command);
 
   if(isValidInput){
@@ -67,10 +69,10 @@ function checkPlacement(dimensions) {
 
 // checks if dimensions are in valid range
 function checkDimension(dimension, axis) {
-  isValid = dimension && _.inRange(dimension, 0 ,TABLE_UNIT);
+ isValid = dimension && _.inRange(dimension, 0 , TABLE_UNIT + 1);
 
   if(!isValid) {
-    console.log(`for ${axis} axis, ERROR_INVALID_DIMENSION`);
+    console.log(`for ${axis} axis, ${ERROR_INVALID_DIMENSION}`);
   }
 
   return isValid;
@@ -78,7 +80,6 @@ function checkDimension(dimension, axis) {
 
 // checks if user has provided a valid direction
 function checkFacing(direction) {
-  direction = _.toUpper(direction);
   isValid = direction && _.includes(DIRECTIONS, direction);
 
   if(!isValid) {
