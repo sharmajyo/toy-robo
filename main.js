@@ -1,5 +1,0 @@
-const startRobot = () => {
-  //TODO
-}
-
-startRobot();
