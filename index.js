@@ -18,7 +18,6 @@ exports.askQuestion = function () {
   name: 'command',
   message: 'I am waiting for your command now...'
   };
-
   return inquirer.prompt([question]);
 }
 

@@ -1,24 +1,26 @@
-_ = require('lodash');
+const _ = require('lodash');
 
-exports.TABLE_UNIT = TABLE_UNIT = 5;
+exports.TABLE_UNIT = 5;
 
 exports.X_AXIS = 'X';
 
 exports.Y_AXIS = 'Y';
 
+exports.ENV_TEST = 'test';
+
 exports.MOVE_STEP = 1;
 
 // sorted for calculating rotation
-exports.ENUM_DIRECTIONS = ENUM_DIRECTIONS = {
+exports.ENUM_DIRECTIONS = {
   NORTH: 'NORTH',
   EAST: 'EAST',
   SOUTH: 'SOUTH',
   WEST: 'WEST',
 };
 
-exports.DIRECTIONS = _.map(ENUM_DIRECTIONS); // ['NORTH', 'EAST', 'SOUTH', 'WEST']
+exports.DIRECTIONS = _.map(exports.ENUM_DIRECTIONS); // ['NORTH', 'EAST', 'SOUTH', 'WEST']
 
-exports.ENUM_COMMANDS = COMMANDS = {
+exports.ENUM_COMMANDS = {
   PLACE: 'PLACE',
   MOVE: 'MOVE',
   LEFT: 'LEFT',
@@ -26,7 +28,7 @@ exports.ENUM_COMMANDS = COMMANDS = {
   REPORT: 'REPORT',
 };
 
-exports.COMMANDS = _.map(COMMANDS); // ['PLACE', 'MOVE' ,'LEFT', 'RIGHT', 'REPORT']
+exports.COMMANDS = _.map(exports.ENUM_COMMANDS); // ['PLACE', 'MOVE' ,'LEFT', 'RIGHT', 'REPORT']
 
 exports.INFO_PLACED = 'Great you have placed me, I am free to move now.';
 
@@ -44,4 +46,4 @@ exports.ERROR_INCOMPLETE_PLACE = 'Sorry, PLACE needs 3 arguments for X, Y and fa
 
 exports.ERROR_INVALID_FACING = 'Please provide a valid facing direction like EAST, WEST, NORTH or SOUTH.';
 
-exports.ERROR_INVALID_DIMENSION = `Please provide a valid dimension, it should be between 0 to ${TABLE_UNIT}.`;
+exports.ERROR_INVALID_DIMENSION = `Please provide a valid dimension, it should be between 0 to ${exports.TABLE_UNIT}.`;

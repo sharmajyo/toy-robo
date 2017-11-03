@@ -1,27 +1,26 @@
-process.env.NODE_ENV = 'test';
+const assert = require('assert');
+const sinon = require('sinon');
+const { ENV_TEST } = require('../const');
 
-assert = require('assert');
-sinon = require('sinon');
-app = require('../index');
+process.env.NODE_ENV = ENV_TEST;
+
+const app = require('../index');
 
 describe('index', () => {
-
   it('should start robot', () => {
     assert.notEqual(app.robot, null);
   });
 
   describe('getUserInput()', () => {
-
     const sandbox = sinon.sandbox.create();
 
     beforeEach(() => {
-      sandbox.stub(app, 'askQuestion').callsFake(() => {
-        return {
-          then: (cb) => {
-            cb({command: 'PLACE 0,0,NORTH'});
-          }
-        };
-      });
+      sandbox.stub(app, 'askQuestion').callsFake(() => ({
+        then: (cb) => {
+          const userInput = 'PLACE 0,0,NORTH';
+          cb({ command: userInput });
+        },
+      }));
     });
 
     after(() => {
@@ -33,5 +32,4 @@ describe('index', () => {
       assert.deepEqual(app.robot.dimensions, { x: 0, y: 0, facing: 'NORTH' });
     });
   });
-
 });
