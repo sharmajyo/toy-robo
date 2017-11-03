@@ -20,7 +20,7 @@ let userCommand = {};
 // disable logging while running unit tests
 exports.log = (msg) => {
   if (process.env.NODE_ENV !== ENV_TEST) {
-    console.exports.log(msg);
+    console.log(msg);
   }
 };
 
